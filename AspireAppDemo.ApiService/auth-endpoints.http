@@ -1,0 +1,13 @@
+@baseUrl = https://localhost:7323/auth
+@token = very_secret_key_that_should_be_long_and_secure
+
+POST {{baseUrl}}/login
+content-type: application/json
+
+{
+    "username": "admin@localhost",
+    "password": "Admin@123"
+}
+
+###
+ GET https://localhost:7323/health

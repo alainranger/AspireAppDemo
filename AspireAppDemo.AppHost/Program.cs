@@ -1,8 +1,10 @@
 var builder = DistributedApplication.CreateBuilder(args);
 
 // Database 
-var postgres = builder.AddPostgres("postgres");
+var postgres = builder.AddPostgres("postgres")
+    .WithPgAdmin();
 var postgresdb = postgres.AddDatabase("postgresdb");
+
 
 // Backend
 var apiService = builder.AddProject<Projects.AspireAppDemo_ApiService>("apiservice")
