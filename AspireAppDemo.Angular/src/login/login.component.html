@@ -1,0 +1,13 @@
+<form (submit)='onLoginSubmit()'>
+  <div>
+    <label>Email</label>
+    <input [(ngModel)]='email' name="email" />
+  </div>
+
+  <div>
+    <label>Mot de passe</label>
+    <input [(ngModel)]='password' type="password" name="password" />
+  </div>
+
+  <button type="submit">Se connecter</button>
+</form>

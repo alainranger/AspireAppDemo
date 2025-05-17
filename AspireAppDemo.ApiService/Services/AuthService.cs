@@ -1,9 +1,9 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
+
 using AspireAppDemo.ApiService.Models;
-using Microsoft.AspNetCore.Http.HttpResults;
+
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 
@@ -36,14 +36,7 @@ public class AuthService(
     {
         ArgumentNullException.ThrowIfNull(request, nameof(request));
 
-        var user = await _userManager.FindByNameAsync(request.Username);
-        if (user == null)
-        {
-            var users = _userManager.Users.ToList();
-            return null;
-        }
-
-        var result = _signInManager.CheckPasswordSignInAsync(user, request.Password, false).Result;
+        var result = await _signInManager.PasswordSignInAsync(request.Username, request.Password, false, false);
         if (!result.Succeeded)
         {
             return null;
@@ -57,7 +50,7 @@ public class AuthService(
 
         return new LoginResponse
         {
-            Token = user.Email != null ? this.GenerateToken(user.Email) : throw new InvalidOperationException("User email is null")
+            Token = request.Username != null ? this.GenerateToken(request.Username) : throw new InvalidOperationException("User email is null")
         };
     }
 

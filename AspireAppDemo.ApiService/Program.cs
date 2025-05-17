@@ -13,6 +13,7 @@ builder.AddServiceDefaults();
 
 builder.AddNpgsqlDbContext<AppIdentityiDbContest>(connectionName: "postgresdb");
 
+
 // Add services to the container.
 builder.Services.AddProblemDetails();
 
@@ -70,7 +71,8 @@ if (app.Environment.IsDevelopment())
     var context = scope.ServiceProvider.GetRequiredService<AppIdentityiDbContest>();
     await context.Database.EnsureCreatedAsync().ConfigureAwait(true);
 
-    SeedData.Initialize(context);
+	using var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
+	await SeedData.Initialize(userManager);
 }
 
 app.UseCors("AllowAll");

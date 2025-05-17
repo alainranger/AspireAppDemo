@@ -13,6 +13,17 @@ var apiService = builder.AddProject<Projects.AspireAppDemo_ApiService>("apiservi
     .WaitFor(postgresdb);
 
 // Frontend
+
+// Angular
+// C:\Users\alain\source\repos\alainranger\AspireAppDemo\AspireAppDemo.Angular\AspireAppDemo.Angular.esproj
+builder.AddNpmApp("frontend-angular", "../AspireAppDemo.Angular")
+	.WithReference(apiService)
+	.WaitFor(apiService)
+	.WithHttpEndpoint(env: "PORT")
+	.WithExternalHttpEndpoints()
+	.PublishAsDockerFile();
+
+
 // Blazor
 builder.AddProject<Projects.AspireAppDemo_Web>("webfrontend")
     .WithExternalHttpEndpoints()
