@@ -3,6 +3,7 @@ var builder = DistributedApplication.CreateBuilder(args);
 // Database 
 var postgres = builder.AddPostgres("postgres")
     .WithPgAdmin();
+
 var postgresdb = postgres.AddDatabase("postgresdb");
 
 
@@ -17,11 +18,11 @@ var apiService = builder.AddProject<Projects.AspireAppDemo_ApiService>("apiservi
 // Angular
 // C:\Users\alain\source\repos\alainranger\AspireAppDemo\AspireAppDemo.Angular\AspireAppDemo.Angular.esproj
 builder.AddNpmApp("frontend-angular", "../AspireAppDemo.Angular")
-	.WithReference(apiService)
-	.WaitFor(apiService)
-	.WithHttpEndpoint(env: "PORT")
-	.WithExternalHttpEndpoints()
-	.PublishAsDockerFile();
+    .WithReference(apiService)
+    .WaitFor(apiService)
+    .WithHttpEndpoint(env: "PORT")
+    .WithExternalHttpEndpoints()
+    .PublishAsDockerFile();
 
 
 // Blazor

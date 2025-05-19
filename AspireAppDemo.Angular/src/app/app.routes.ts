@@ -1,7 +1,8 @@
 import { Routes } from '@angular/router';
-import { UserProfileComponent } from '../user-profile/user-profile.component';
-import { AuthGuard } from './core/auth.guard';
-import { LoginComponent } from '../login/login.component';
+import { UserProfileComponent } from './user/profile/profile.component';
+import { AuthGuard } from './core/guards/auth.guard';
+import { LoginComponent } from './auth/login/login.component';
+import { SubscriptionComponent } from './auth/subscription/subscription.component';
 
 
 export const routes: Routes = [
@@ -13,5 +14,9 @@ export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'subscribe',
+    component: SubscriptionComponent
   }
 ];

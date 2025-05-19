@@ -6,5 +6,5 @@ public interface IAuthService
 {
     Task<LoginResponse?> AuthenticateAsync(LoginRequest request);
     Task LogoutAsync();
-    Task<bool> SubscribeAsync(User user, string password);
+    Task<bool> SubscribeAsync(SubscribeRequest request);
 }

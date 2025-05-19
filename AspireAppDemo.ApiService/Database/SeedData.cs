@@ -8,16 +8,16 @@ public static class SeedData
     {
         ArgumentNullException.ThrowIfNull(userManager, nameof(userManager));
 
-		// Look for any games.
-		User? user = await userManager.FindByNameAsync("admin@localhost");
+        // Look for any games.
+        User? user = await userManager.FindByNameAsync("admin@localhost");
 
-		if (user != null)
+        if (user != null)
         {
             return;   // DB has been seeded
         }
 
-		// Create fake user with password
-		user = new User()
+        // Create fake user with password
+        user = new User()
         {
             UserName = "admin@localhost",
             Email = "admin@localhost",
@@ -30,7 +30,7 @@ public static class SeedData
         if (resultCreate != null)
         {
             user.EmailConfirmed = true;
-			await userManager.UpdateAsync(user);
+            await userManager.UpdateAsync(user);
         }
-	}
+    }
 }

@@ -10,4 +10,16 @@ content-type: application/json
 }
 
 ###
+
+POST {{baseUrl}}/subscribe
+content-type: application/json
+
+{
+    "lastname": "Doe",
+    "firstname": "John",
+    "email": "john.doe@localhost",
+    "password": "Zsw21qa!"
+}
+
+###
  GET https://localhost:7323/health

@@ -1,5 +1,6 @@
 using AspireAppDemo.ApiService.Models;
 using AspireAppDemo.ApiService.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AspireAppDemo.ApiService.Endpoints;
 
@@ -26,7 +27,7 @@ public static class AuthEndpoints
             .WithTags("Authentication");
 
         group.MapPost("/login", async (
-            LoginRequest request,
+            [FromBody] LoginRequest request,
             IAuthService authService) =>
         {
             var result = await authService.AuthenticateAsync(request);
@@ -41,11 +42,10 @@ public static class AuthEndpoints
         });
 
         group.MapPost("/subscribe", async (
-            User user,
-            string password,
+            [FromBody] SubscribeRequest request,
             IAuthService authService) =>
         {
-            var result = await authService.SubscribeAsync(user, password);
+            var result = await authService.SubscribeAsync(request);
             return result ? Results.Ok() : Results.BadRequest();
         });
     }

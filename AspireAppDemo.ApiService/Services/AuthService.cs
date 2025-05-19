@@ -68,9 +68,16 @@ public class AuthService(
     /// <param name="user">User object containing user details.</param>
     /// <param name="password">Password for the new user.</param>
     /// <returns>True if subscription is successful, otherwise false.</returns>
-    public async Task<bool> SubscribeAsync(User user, string password)
+    public async Task<bool> SubscribeAsync(SubscribeRequest request)
     {
-        var result = await _userManager.CreateAsync(user, password);
+        var newUser = new User
+        {
+            UserName = request.Email,
+            Email = request.Email,
+            Firstname = request.Firstname,
+            Lastname = request.Lastname
+        };
+        var result = await _userManager.CreateAsync(newUser, request.Password);
 
         return await Task.FromResult(result.Succeeded);
     }
